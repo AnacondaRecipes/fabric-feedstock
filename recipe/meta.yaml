@@ -1,4 +1,4 @@
-{% set version = "2.5.0" %}
+{% set version = "2.6.0" %}
 
 package:
   name: fabric
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/f/fabric/fabric-{{ version }}.tar.gz
-  sha256: 24842d7d51556adcabd885ac3cf5e1df73fc622a1708bf3667bf5927576cdfa6
+  sha256: 47f184b070272796fd2f9f0436799e18f2ccba4ee8ee587796fca192acd46cd2
 
 build:
   number: 0
