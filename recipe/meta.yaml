@@ -30,18 +30,16 @@ requirements:
     - decorator >=5
     - deprecated >=1.2
 
+# Unable to run tests: ModuleNotFoundError: No module named 'icecream' -> https://pypi.org/project/icecream
 test:
-  source_files:
-    - tests
   imports:
     - fabric
   commands:
     - pip check
     - fab --help
-    - pytest -v tests
   requires:
     - pip
-    - pytest >=7
+ 
 
 about:
   home: http://fabfile.org
