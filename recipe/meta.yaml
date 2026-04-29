@@ -1,46 +1,57 @@
-{% set version = "2.6.0" %}
+{% set name = "fabric" %}
+{% set version = "3.2.3" %}
 
 package:
-  name: fabric
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/f/fabric/fabric-{{ version }}.tar.gz
-  sha256: 47f184b070272796fd2f9f0436799e18f2ccba4ee8ee587796fca192acd46cd2
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: dcbd2c47ad87688facaef5cc11aab6d1ec9ed05645fed97a5de7204d5d17cc44
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
+    # binary_name = "fab"
     - fab = fabric.main:program.run
+  skip: true  # [py<36]
 
 requirements:
   host:
     - python
     - pip
-
+    - setuptools
+    - wheel
   run:
     - python
-    - invoke >=1.3,<2.0
+    - invoke >= 2.0, <3.0
     - paramiko >=2.4
+    - decorator >=5
+    - deprecated >=1.2
 
 test:
+  source_files:
+    - tests
   imports:
     - fabric
-
   commands:
     - fab --help
+    - pip check
+  requires:
+    - pip
+    - pytest >=7
 
 about:
   home: http://fabfile.org
   license_file: LICENSE
   license: BSD 2-Clause
   license_family: BSD
-  summary: 'Fabric is a simple, Pythonic tool for remote execution and deployment.'
+  summary: Fabric is a simple, Pythonic tool for remote execution and deployment.
   description: |
     Fabric is a Python library and command-line tool for streamlining the use
     of SSH for application deployment or systems administration tasks.
-  doc_url: http://docs.fabfile.org/
+  doc_url: http://docs.fabfile.org
   doc_source_url: https://github.com/fabric/fabric/blob/master/sites/docs/index.rst#id1
   dev_url: https://github.com/fabric/fabric
 
