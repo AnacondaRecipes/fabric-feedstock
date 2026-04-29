@@ -25,7 +25,7 @@ requirements:
     - wheel
   run:
     - python
-    - invoke >= 2.0, <3.0
+    - invoke >=2.0,<3.0
     - paramiko >=2.4
     - decorator >=5
     - deprecated >=1.2
@@ -36,8 +36,9 @@ test:
   imports:
     - fabric
   commands:
-    - fab --help
     - pip check
+    - fab --help
+    - pytest -v tests
   requires:
     - pip
     - pytest >=7
